@@ -1,7 +1,6 @@
 If you are applying as a Tech Writer at [Datadog](https://www.datadoghq.com/) you are in the right spot.
 
-<a href="http://www.flickr.com/photos/alq666/10125225186/" title="The view from our old offices roofdeck">
-<img src="http://farm6.staticflickr.com/5497/10125225186_825bfdb929.jpg" width="500" height="332" alt="_DSC4652"></a>
+<img src="https://repository-images.githubusercontent.com/2967233/246a3700-b83c-11e9-9960-8b03925fc6f7" width="500" height="500" alt="Logo">
 
 ## Instructions
 
