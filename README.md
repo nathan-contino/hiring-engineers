@@ -40,7 +40,7 @@ Utilize the Datadog API to create a Timeboard that contains:
 * Your custom metric scoped over your host.
 * Any metric from the Integration on your Database with the anomaly function applied.
 
-Please be sure, when submitting your hiring challenge, to include the script that you've used to create this Timemboard.
+Please be sure, when submitting your hiring challenge, to include the script that you've used to create this Timeboard.
 
 Once this is created, access the Dashboard from your Dashboard List in the UI:
 
