@@ -35,16 +35,16 @@ Then, [sign up for Datadog](https://app.datadoghq.com/signup) (use “Datadog Re
 
 ## Visualizing Data:
 
-Utilize the Datadog API to create a Timeboard that contains:
+Utilize the Datadog API to create a Dashboard that contains:
 
 * Your custom metric scoped over your host.
 * Any metric from the Integration on your Database with the anomaly function applied.
 
-Please be sure, when submitting your hiring challenge, to include the script that you've used to create this Timeboard.
+Please be sure, when submitting your hiring challenge, to include the script that you've used to create this Dashboard.
 
 Once this is created, access the Dashboard from your Dashboard List in the UI:
 
-* Set the Timeboard's timeframe to the past 5 minutes
+* Set the Dashboards's timeframe to the past 5 minutes
 * Take a snapshot of this graph and use the @ notation to send it to yourself.
 * **Bonus Question**: What is the Anomaly graph displaying?
 
