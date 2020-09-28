@@ -80,9 +80,9 @@ The Datadog Agent includes the MongoDB integration by default, so all you have t
 1. [Install MongoDB](https://docs.mongodb.com/manual/installation/) and get a database running locally.
 2. Connect to MongoDB with the `mongo` command from your terminal.
 3. Create an admin for your MongoDB cluster:
-   ```json
+   ```
    	  use admin
-	  db.createUser(
+	    db.createUser(
          {
             user: "myUserAdmin",
             pwd: passwordPrompt(), // or cleartext password
@@ -92,14 +92,14 @@ The Datadog Agent includes the MongoDB integration by default, so all you have t
 
    ```
 4. Connect to your MongoDB installation with the admin account you just created:
-   ```json
+   ```
       use admin
       db.auth("admin", "<YOUR_MONGODB_ADMIN_PASSWORD>")
 
    ```
 5. The MongoDB Integration requires a user account with specific permissions 
    to connect to MongoDB. Create an account with the required permissions with the following command in mongodb:
-   ```json
+   ```
       db.createUser({
   	     "user": "datadog",
          "pwd": "<UNIQUEPASSWORD>",
@@ -117,7 +117,7 @@ The Datadog Agent includes the MongoDB integration by default, so all you have t
 8. Configure the ``username``, ``password``, ``hosts``, and ``database`` keys so that the
    Agent can connect to your newly-created local MongoDB instance. You should assign these
    keys the following values:
-   ```json
+   ```yaml
    	  - hosts:
           - localhost:27017
 
@@ -189,20 +189,20 @@ While the built-in metrics and integrations capture a lot of detail about your m
    named `custom_randomnumber.py` in the ``checks.d`` directory stored at the same level as ``conf.d`` and ``datadog.yaml``. On the macOS machine used for this example, the implementation file is located at ``~/.datadog-agent/checks.d/custom_randomnumber.py``. Place the following Python code into the file:
    ```python
    	  import random
-	  # the following try/except block will make the custom check compatible with any Agent version
-	  try:
-	      # first, try to import the base class from new versions of the Agent...
-	      from datadog_checks.base import AgentCheck
-	  except ImportError:
-	      # ...if the above failed, the check is running in Agent version < 6.6.0
-	      from checks import AgentCheck
+	    # the following try/except block will make the custom check compatible with any Agent version
+	    try:
+	        # first, try to import the base class from new versions of the Agent...
+	        from datadog_checks.base import AgentCheck
+	    except ImportError:
+	        # ...if the above failed, the check is running in Agent version < 6.6.0
+	        from checks import AgentCheck
 
-	  # content of the special variable __version__ will be shown in the Agent status page
-	  __version__ = "1.0.0"
+	    # content of the special variable __version__ will be shown in the Agent status page
+	    __version__ = "1.0.0"
 
-	  class RandomNumberCheck(AgentCheck):
-	      def check(self, instance):
-	          self.gauge('custom.randomnumber', random.randint(0,1000))
+	    class RandomNumberCheck(AgentCheck):
+	        def check(self, instance):
+	            self.gauge('custom.randomnumber', random.randint(0,1000))
 
    ```
 
@@ -215,7 +215,7 @@ Once you've created the configuration and the implementation for your custom che
 
 Once you've restarted the agent, you should check to see if the check ran correctly. You can do this by running the following command:
 ```bash
-   dsudo datadog-agent check custom_randomnumber
+   sudo datadog-agent check custom_randomnumber
 
 ```
 
@@ -227,7 +227,7 @@ If you see something like the following instead:
 ![not the check test output you want](not_the_check_test_output_you_want.png)
 ... then your check is not running correctly! In this particular example, the author made the mistake of printing out the metric instead of actually passing it through to the Agent. Don't be like the author -- look for the "Series" heading to verify your check's correctness!
 
-###How to Configure the Collection Interval of Your Check
+### How to Configure the Collection Interval of Your Check
 
 You can customize the collection interval of your check without modifying the check itself by changing the ``instances.min_collection_interval`` property in the YAML configuration file of your check.
 
@@ -249,7 +249,7 @@ You can explore the example dashboard [here](https://p.datadoghq.com/sb/95u7bvn8
 
 # Use dog-watcher to Backup Datadog Dashboards
 
-[dog-watcher](https://github.com/brightcove/dog-watcher) is a utility library that helps you track changes to your Datadog dashboards. Every time ``dog-watcher`` runs, it downloads a copy of all of your Datadog dashboards and monitors as JSON. ``dog-watcher`` diffs this JSON against the dashboards and monitors from the last time it ran, and if the monitors and dashboards have changed at all, it uploads the latest copy to GitHub via a new commit in a git repo. This way, you never have to worry about editing your Datadog dashboards -- they're all backed up! Customize away to your heart's content, and if you accidentally ruin everything when you try to make your dashboard better than ever, you can always use the Datadog API to restore your dashboard to its former glory.
+[dog-watcher](https://github.com/brightcove/dog-watcher) is a utility library that helps you track changes to your Datadog dashboards. Every time ``dog-watcher`` runs, it downloads a copy of all of your Datadog dashboards and monitors as JSON. ``dog-watcher`` diffs this JSON against the dashboards and monitors from the last time it ran, and if the monitors and dashboards have changed at all, it uploads the latest copy to GitHub via a new commit in a git repo. This way, you never have to worry about editing your Datadog dashboards -- they're all backed up! Customize away to your heart's content, and if you accidentally ruin everything trying to make your dashboard better than ever, you can always use the Datadog API to restore your dashboard to its former glory.
 
 ## Installation
 
@@ -277,7 +277,7 @@ Next, you'll need to install the dependencies for the project using [npm](https:
 
 NOTE: If you haven't already installed npm, you'll need it to run ``dog-watcher``! You can learn how to install npm [here](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm).
 
-And that's it! As long as the ``npm install`` command didn't display any errors (warnings are OK), you're ready to run ``dog-watcher``! Head over to the **Configuration** section to personalize your ``dog-watcher`` installation. If you *did* see errors, you might want to consult [Stack Overflow](https://stackoverflow.com/).
+And that's it! As long as the ``npm install`` command didn't display any errors (warnings are OK), you're ready to run ``dog-watcher``! Head over to the **Configuration** section to personalize your ``dog-watcher`` installation. If you *did* see errors, you might want to consult [Stack Overflow](https://stackoverflow.com/) -- I'm not sure I'm capable of listing all the possible errors you might run into with npm!
 
 ## Configuration
 
@@ -288,10 +288,10 @@ All of ``dog-watcher``'s configuration lives in one file: ``config.json``. ``dog
 1. Find your API and App keys in the Datadog UI. Navigate to the "Integrations" sidebar entry and click the "APIs" option in the context menu. On the APIs page, you can expand the "API Keys" and "Application Keys" sections to access your keys. Hover over the purple block to view the key itself. For security reasons, you may want to create a new Application Key specifically for ``dog-watcher``.
 2. Fill in the values of your Datadog API Key and Datadog App Key in ``config.json`` so that ``dog-watcher`` can communicate with your backend instance of Datadog using the Datadog API. You can do this by copying the values from the "APIs" Datadog UI page into the corresponding "dataDogApiKey" and "dataDogAppKey" fields.
 3. Create a new GitHub repo to store your dashboard history.
-4. Copy the SSH URL for your GitHub repo (it should look something like "git@github.com:<your_username>/<your_repository_name>.git") into the "gitRepoForBackups" field of ``config.json``.
+4. Copy the SSH URL for your GitHub repo (it should look something like ``git@github.com:<your_username>/<your_repository_name>.git``) into the "gitRepoForBackups" field of ``config.json``.
 5. If you would like ``dog-watcher`` to generate a Datadog Event whenever the service runs, even if there have been no changes to your dashboards, change the value for the "sendEventOnNoop" field to "true" (note that ``dog-watcher`` expects a string containing the either the word "true" or the word "false", not a JSON boolean).
 6. If you decided to set "sendEventOnNoop" to true, you can configure a custom message for your Datadog Event in the "noopEventMessage" field. You'll see this message in the description for an event belonging to "DataDog Dashboard Backup" whenever ``dog-watcher`` runs but doesn't detect dashboard changes, so I suggest something sassy: "No changes to your Datadog dashboards -- are you sure you're working hard enough?".
-7. Lastly, configure a [CRON](https://en.wikipedia.org/wiki/Cron) backup schedule so that ``dog-watcher`` will regularly run at some interval, backing up your dashboards whenever they change. If you'd rather run ``dog-watcher`` exclusively manually, you can simply delete this field -- but if you do, make sure that you delete the comma after the value for the preceding "noopEventMessage" field: the JSON parser used by ``dog-watcher`` does not like trailing commas in JSON!
+7. Lastly, configure a [cron](https://en.wikipedia.org/wiki/Cron) backup schedule so that ``dog-watcher`` will regularly run at some interval, backing up your dashboards whenever they change. If you'd rather run ``dog-watcher`` exclusively manually, you can simply delete this field -- but if you do, make sure that you delete the comma after the value for the preceding "noopEventMessage" field: the JSON parser used by ``dog-watcher`` does not like trailing commas in JSON!
 
 ## Usage
 
@@ -302,7 +302,7 @@ To run ``dog-watcher``, run the following command in the root directory of the `
 
 ```
 
-You should see output like the following (though the "Scheduling backups" line won't show up unless you configured a CRON backup schedule):
+You should see output like the following (though the "Scheduling backups" line won't show up unless you configured a cron backup schedule):
 
 ```
 [2020-09-27T23:47:50.414] [INFO] dog-watcher - Scheduling backups to for */5 * * * *
@@ -325,7 +325,7 @@ If you see output like the following:
 
 ## Best Practices
 
-Your dashboards probably don't change too much, so don't configure a CRON tab that's too frequent! ``dog-watcher`` uses the GitHub API and the Datadog API to download and upload all of your dashboards, so if you have a lot, that could result in a lot of network traffic. Once a day (``0 0 * * * ``) should cover most use cases!
+Your dashboards probably don't change too much, so don't configure a cron tab that's too frequent! ``dog-watcher`` uses the GitHub API and the Datadog API to download and upload all of your dashboards, so if you have a lot, that could result in a lot of network traffic. Once a day (``0 0 * * * ``, if you're not a cron expert) should cover most use cases!
 
 ## Thanks
 
